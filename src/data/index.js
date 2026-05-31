@@ -30,7 +30,7 @@ export const HOME_PHOTOS = [
 ];
 
 export const ROLES = [
-  "Content Creator",
+  "Content Creator ",
   "Photographer",
   "Videographer",
   "Social Media Manager",
@@ -38,7 +38,7 @@ export const ROLES = [
 ];
 
 export const HERO_STATS = [
-  { num: 100, suffix: "+", label: "Projects" },
+  { num: 100, suffix: "+", label: "Project" },
   { num: 50, suffix: "+", label: "Events" },
   { num: 15, suffix: "+", label: "Awards" },
   { num: 5, suffix: "+", label: "Years" },
