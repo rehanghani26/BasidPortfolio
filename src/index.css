@@ -29,7 +29,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   background: #050508;
 }
 
@@ -63,7 +63,7 @@ button {
 
 @layer components {
   .gold-btn {
-    @apply inline-flex items-center justify-center rounded-full font-bold text-zinc-950 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl;
+    @apply inline-flex items-center justify-center rounded-full font-bold text-zinc-950 shadow-lg hover:shadow-2xl;
     background: linear-gradient(135deg, #c8a850, #f1d98e, #e8c97a);
   }
 
@@ -122,35 +122,29 @@ button {
     display: block;
     opacity: 0;
     pointer-events: none;
-    transform: scale(1.08) translateY(14px);
-    transition:
-      opacity 1400ms cubic-bezier(0.4, 0, 0.2, 1),
-      transform 5200ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform: none;
   }
 
   .hero-photo-slide.is-active {
     opacity: 1;
     pointer-events: auto;
-    transform: scale(1) translateY(0);
+    transform: none;
   }
 }
 
 .reveal,
 .reveal-l,
 .reveal-r {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 700ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: none;
 }
 
 .reveal-l {
-  transform: translateX(-32px);
+  transform: none;
 }
 
 .reveal-r {
-  transform: translateX(32px);
+  transform: none;
 }
 
 .reveal.is-visible,
@@ -245,19 +239,39 @@ button {
 }
 
 .animate-blink {
-  animation: blink 1.4s ease-in-out infinite;
+  animation: none;
 }
 
 .animate-float {
-  animation: float1 4s ease-in-out infinite;
+  animation: none;
 }
 
 .animate-orb {
-  animation: orbFloat 10s ease-in-out infinite;
+  animation: none;
 }
 
 .animate-pulse-slow {
-  animation: pulseSlow 1.7s ease-in-out infinite;
+  animation: none;
+}
+
+*,
+*::before,
+*::after {
+  animation: none !important;
+  scroll-behavior: auto !important;
+  transition: none !important;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

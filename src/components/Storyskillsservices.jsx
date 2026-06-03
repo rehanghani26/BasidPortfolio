@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { STORY, SKILLS, SKILL_PILLS, SERVICES } from "../data";
 
 export function Story() {
@@ -49,7 +48,7 @@ export function Story() {
                 <div className="w-12 h-12 rounded-full bg-[#0a0a10] border-2 border-amber-400 flex items-center justify-center font-mono text-[0.6rem] text-amber-400">
                   {item.year.slice(2)}
                 </div>
-                <div className="absolute inset-[-6px] rounded-full border border-amber-400/20 animate-pulse-slow" />
+                <div className="absolute inset-[-6px] rounded-full border border-amber-400/20" />
               </div>
               <div className="flex-1 hidden md:block" />
             </div>
@@ -61,32 +60,17 @@ export function Story() {
 }
 
 function SkillBar({ name, pct }) {
-  const fillRef = useRef(null);
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting && fillRef.current) {
-          fillRef.current.style.width = pct + "%";
-          io.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (fillRef.current) io.observe(fillRef.current.parentElement);
-    return () => io.disconnect();
-  }, [pct]);
-
   return (
-    <div className="reveal p-5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+    <div className="reveal p-5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20">
       <div className="flex justify-between items-center mb-3">
         <span className="font-medium text-sm">{name}</span>
         <span className="font-mono text-xs text-amber-400">{pct}%</span>
       </div>
       <div className="h-1 bg-[#0f0f18] rounded overflow-hidden">
         <div
-          ref={fillRef}
-          className="h-full rounded transition-all duration-[1200ms] ease-out w-0"
+          className="h-full rounded"
           style={{
+            width: `${pct}%`,
             background: "linear-gradient(90deg,#c8a850,#e8c97a)",
             boxShadow: "0 0 8px rgba(232,201,122,0.4)",
           }}

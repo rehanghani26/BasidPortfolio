@@ -1,45 +1,18 @@
-import { useEffect, useRef, useState } from "react";
 import { STATS, CASE_STUDIES, TESTIMONIALS } from "../data";
 
 function AnimStat({ target, suffix, label }) {
-  const ref = useRef(null);
-  const [val, setVal] = useState(0);
-  const started = useRef(false);
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting && !started.current) {
-          started.current = true;
-          const dur = 2000,
-            start = Date.now();
-          const run = () => {
-            const p = Math.min((Date.now() - start) / dur, 1);
-            setVal(Math.round((1 - Math.pow(1 - p, 3)) * target));
-            if (p < 1) requestAnimationFrame(run);
-            else setVal(target);
-          };
-          run();
-        }
-      },
-      { threshold: 0.3 }
-    );
-    if (ref.current) io.observe(ref.current);
-    return () => io.disconnect();
-  }, [target]);
-
   return (
     <div
-      ref={ref}
-      className="reveal p-10 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-amber-400/30 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-all relative overflow-hidden group"
+      className="reveal p-10 rounded-3xl bg-white/5 border border-white/10 text-center hover:border-amber-400/30 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] relative overflow-hidden group"
     >
       <div
-        className="absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-400"
+        className="absolute bottom-0 left-0 right-0 h-0.5"
         style={{
           background: "linear-gradient(90deg,transparent,#e8c97a,transparent)",
         }}
       />
       <span className="block font-display font-black text-5xl text-amber-400 leading-none">
-        {val}
+        {target}
         <span className="text-3xl">{suffix}</span>
       </span>
       <div className="text-xs uppercase tracking-[3px] text-zinc-400 mt-3">

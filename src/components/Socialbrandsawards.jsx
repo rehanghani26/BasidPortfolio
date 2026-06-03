@@ -1,29 +1,8 @@
-import { useEffect, useRef } from "react";
 import { SM_STATS, BRANDS, AWARDS, CERTS, EXPERIENCES } from "../data";
 
 function BarChart({ title, bars }) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          ref.current?.querySelectorAll("[data-w]").forEach((el) => {
-            el.style.width = el.dataset.w;
-          });
-          io.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (ref.current) io.observe(ref.current);
-    return () => io.disconnect();
-  }, []);
-
   return (
-    <div
-      ref={ref}
-      className="p-8 rounded-2xl bg-white/5 border border-white/10"
-    >
+    <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
       <div className="font-semibold text-sm mb-6">{title}</div>
       <div className="space-y-4">
         {bars.map(({ label, pct }) => (
@@ -33,9 +12,11 @@ function BarChart({ title, bars }) {
             </span>
             <div className="flex-1 h-2 bg-[#0f0f18] rounded overflow-hidden">
               <div
-                className="h-full rounded w-0 transition-all duration-[1500ms] ease-out"
-                data-w={pct + "%"}
-                style={{ background: "linear-gradient(90deg,#c8a850,#e8c97a)" }}
+                className="h-full rounded"
+                style={{
+                  width: `${pct}%`,
+                  background: "linear-gradient(90deg,#c8a850,#e8c97a)",
+                }}
               />
             </div>
             <span className="font-mono text-xs text-amber-400 w-8 text-right">

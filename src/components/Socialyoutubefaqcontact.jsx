@@ -12,9 +12,9 @@ const HIGHLIGHTS = [
 
 export function Instagram() {
   return (
-    <section id="instagram" className="py-32">
+    <section id="instagram" className="">
       <div className="max-w-7xl mx-auto px-4 md:px-12">
-        <div className="reveal text-center mb-10">
+        <div className="reveal text-center mb-2">
           <div className="section-label justify-center">@basid.emam</div>
           <h2 className="font-display font-black text-5xl">
             Instagram <em className="gold-text-simple not-italic">Feed</em>
@@ -54,7 +54,7 @@ export function Instagram() {
             </div>
           </div>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/basid.emam/"
             target="_blank"
             rel="noopener noreferrer"
             className="md:ml-auto gold-btn px-7 py-2.5 text-sm"
@@ -63,44 +63,7 @@ export function Instagram() {
           </a>
         </div>
         {/* Highlights */}
-        <div
-          className="reveal flex gap-5 overflow-x-auto pb-2 mb-6"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {HIGHLIGHTS.map((h, i) => (
-            <div key={i} className="flex-shrink-0 text-center cursor-pointer">
-              <div
-                className="w-16 h-16 rounded-full p-0.5 mb-2"
-                style={{
-                  background:
-                    "linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)",
-                }}
-              >
-                <div className="w-full h-full rounded-full bg-[#0a0a10] border-2 border-[#0a0a10] flex items-center justify-center text-2xl">
-                  {h.emoji}
-                </div>
-              </div>
-              <span className="text-xs text-zinc-400">{h.label}</span>
-            </div>
-          ))}
-        </div>
-        {/* Grid */}
-        <div className="reveal grid grid-cols-3 md:grid-cols-6 gap-1">
-          {IG_EMOJIS.map((emoji, i) => (
-            <div
-              key={i}
-              className="aspect-square bg-[#0f0f18] cursor-pointer relative group overflow-hidden rounded-sm"
-            >
-              <div className="absolute inset-0 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">
-                {emoji}
-              </div>
-              <div className="absolute inset-0 bg-[#050508]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 text-white text-xs font-semibold">
-                <span>❤️ {Math.floor(Math.random() * 400 + 50)}</span>
-                <span>💬 {Math.floor(Math.random() * 40 + 5)}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+
       </div>
     </section>
   );

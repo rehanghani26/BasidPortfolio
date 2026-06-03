@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import About from "./components/About.jsx";
-import Cursor from "./components/Cursor.jsx";
 import Hero from "./components/Hero.jsx";
-import Loader from "./components/Loader.jsx";
 import Navbar from "./components/Navbar.jsx";
-import Particles from "./components/Particles .jsx";
 import { Photography, Videography } from "./components/Photovideo.jsx";
 import Portfolio from "./components/Portfolio.jsx";
 import {
@@ -18,7 +15,7 @@ import {
 import {
   Blog,
   Contact,
-  FAQ,
+  // FAQ,
   Footer,
   Instagram,
   YouTube,
@@ -26,7 +23,7 @@ import {
 import {
   CaseStudies,
   Statistics,
-  Testimonials,
+  // Testimonials,
 } from "./components/Statstestimonials.jsx";
 import { Services, Skills, Story } from "./components/Storyskillsservices.jsx";
 
@@ -38,24 +35,18 @@ function getInitialTheme() {
   return window.localStorage.getItem("theme") || "dark";
 }
 
-function ScrollToHash({ loading }) {
+function ScrollToHash() {
   const { hash, pathname } = useLocation();
 
   useEffect(() => {
-    if (loading) {
+    if (!hash) {
+      window.scrollTo(0, 0);
       return;
     }
 
-    window.requestAnimationFrame(() => {
-      if (!hash) {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
-      }
-
-      const target = document.querySelector(hash);
-      target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }, [hash, loading, pathname]);
+    const target = document.querySelector(hash);
+    target?.scrollIntoView({ block: "start" });
+  }, [hash, pathname]);
 
   return null;
 }
@@ -72,17 +63,17 @@ function HomePage() {
       {/* <Photography /> */}
       <Videography />
       <SocialMedia />
-      <Brands />
+      {/* <Brands /> */}
       <Awards />
       <Certifications />
       <Experience />
       <Statistics />
       <CaseStudies />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Instagram />
-      <YouTube />
-      <Blog />
-      <FAQ />
+      {/* <YouTube /> */}
+      {/* <Blog /> */}
+      {/* <FAQ /> */}
       <Contact />
     </main>
   );
@@ -90,7 +81,6 @@ function HomePage() {
 
 export default function App() {
   const [theme, setTheme] = useState(getInitialTheme);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -98,27 +88,9 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
-    if (loading) {
-      return undefined;
-    }
-
     const elements = document.querySelectorAll(".reveal, .reveal-l, .reveal-r");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
-    );
-
-    elements.forEach((element) => observer.observe(element));
-
-    return () => observer.disconnect();
-  }, [loading]);
+    elements.forEach((element) => element.classList.add("is-visible"));
+  }, []);
 
   const toggleTheme = () => {
     setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
@@ -131,7 +103,9 @@ export default function App() {
         autoPlay
         muted
         loop
-        className="fixed top-0 left-0 w-full h-full object-cover -z-10"
+        playsInline
+        preload="metadata"
+        className="fixed top-0 left-0 hidden h-full w-full object-cover -z-10 md:block"
       >
         <source src="/videos/video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
@@ -140,11 +114,8 @@ export default function App() {
       {/* Dark Overlay for Better Text Readability */}
       <div className="fixed top-0 left-0 w-full h-full bg-black/40 -z-10" />
 
-      {loading ? <Loader onDone={() => setLoading(false)} /> : null}
-      <Particles />
-      <Cursor />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <ScrollToHash loading={loading} />
+      <ScrollToHash />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
