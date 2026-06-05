@@ -68,7 +68,7 @@ function HomePage() {
       <Certifications />
       <Experience />
       <Statistics />
-      <CaseStudies />
+      {/* <CaseStudies /> */}
       {/* <Testimonials /> */}
       <Instagram />
       {/* <YouTube /> */}

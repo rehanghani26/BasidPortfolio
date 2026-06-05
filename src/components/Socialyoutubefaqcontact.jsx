@@ -439,7 +439,7 @@ const FOOTER_LINKS = {
     "Portfolio",
     "Awards",
     "Certifications",
-    "Case Studies",
+    // "Case Studies",
     "Blog",
     "FAQ",
   ],
